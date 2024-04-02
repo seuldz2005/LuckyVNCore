@@ -5,3 +5,6 @@
 # Dependencies
 * Version 1.18.2 or latest
 * Java 17 or higher
+
+# Maven
+comming soon ...
