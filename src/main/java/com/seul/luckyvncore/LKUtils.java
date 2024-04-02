@@ -1,6 +1,8 @@
 package com.seul.luckyvncore;
 
 import org.bukkit.ChatColor;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -32,5 +34,11 @@ public class LKUtils {
         }
     }
 
+
+    // get block face in target block
+    public static BlockFace getBlockFace(Player player) {
+        List<Block> lastTwoTargetBlocks = player.getLastTwoTargetBlocks(null, 100);
+        return lastTwoTargetBlocks.get(1).getFace(lastTwoTargetBlocks.get(0));
+    }
 
 }
