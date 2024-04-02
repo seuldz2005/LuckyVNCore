@@ -1,0 +1,7 @@
+name: LuckyVNCore
+version: '${project.version}'
+main: com.seul.luckyvncore.LuckyVNCore
+api-version: '1.13'
+authors: [Crush_Seul]
+description: LUCKYVN CORE plugin for LUCKYVN NETWORK. It plugin have many API for plugin in SERVER and support me make many fantasy plugins 
+website: luckyvn.com
