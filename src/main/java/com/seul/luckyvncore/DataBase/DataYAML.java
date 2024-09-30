@@ -8,6 +8,7 @@ import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.UUID;
 
 public class DataYAML {
@@ -21,6 +22,18 @@ public class DataYAML {
         this.plugin = plugin;
     }
 
+    public HashMap<UUID, PlayerData> loadPlayerData() {
+        File files = new File (getFolderPlugin(), "userdata");
+
+        if (!files.exists()) return null;
+        HashMap<UUID, PlayerData> datas = new HashMap<>();
+        for (File file : files.listFiles()) {
+            UUID uuid = UUID.fromString(file.getName().replace(".yml", ""));
+            datas.put(uuid, new PlayerData(uuid));
+        }
+        return datas;
+    }
+
     public File getFolderPlugin() {
         return folderPlugin;
     }
@@ -28,6 +41,7 @@ public class DataYAML {
     public Plugin getPlugin() {
         return plugin;
     }
+
 
     public class PlayerData {
         private UUID uuid;
@@ -75,4 +89,5 @@ public class DataYAML {
             }
         }
     }
+
 }

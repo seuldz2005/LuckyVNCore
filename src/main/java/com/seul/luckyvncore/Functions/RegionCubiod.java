@@ -59,6 +59,7 @@ public class RegionCubiod {
         return new Location(this.world, (this.xMax - this.xMin) / 2 + this.xMin, (this.yMax - this.yMin) / 2 + this.yMin, (this.zMax - this.zMin) / 2 + this.zMin);
     }
 
+
     public double getDistance() {
         return this.getPoint1().distance(this.getPoint2());
     }

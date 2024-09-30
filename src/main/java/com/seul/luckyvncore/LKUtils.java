@@ -1,6 +1,7 @@
 package com.seul.luckyvncore;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
@@ -26,6 +27,10 @@ public class LKUtils {
         return ChatColor.translateAlternateColorCodes('&', message);
     }
 
+    public void sendMessage(Player player, String message) {
+        player.sendMessage(color(message));
+    }
+
 
     // send message color
     public static void sendMessageList(List<String> message, Player player) {
@@ -40,5 +45,11 @@ public class LKUtils {
         List<Block> lastTwoTargetBlocks = player.getLastTwoTargetBlocks(null, 100);
         return lastTwoTargetBlocks.get(1).getFace(lastTwoTargetBlocks.get(0));
     }
+
+/*    public static String LocationToSplit(Location loc) {
+
+    }*/
+
+
 
 }
