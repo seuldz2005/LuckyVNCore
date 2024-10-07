@@ -35,15 +35,10 @@
 
         public static void sendMessage(CommandSender player, String message) {
 
-
-            if (player == null) return;
-
             player.sendMessage(color(message));
         }
 
         public static void sendMessage(CommandSender player, List<String> message) {
-
-            if (player == null) return;
 
             Iterator var2 = message.iterator();
 
@@ -80,7 +75,7 @@
             }
 
             Location loc = new Location(world, (double)x, (double)y, (double)z);
-            loc.setDirection(new Vector(Integer.parseInt(components[4]), Integer.parseInt(components[5]), Integer.parseInt(components[6])));
+            loc.setDirection(new Vector(Double.valueOf(components[4]), Double.valueOf(components[5]), Double.valueOf(components[6])));
             return loc;
         }
 
@@ -101,7 +96,8 @@
                 return;
             }
             if (command.contains("[player]")) {
-                Bukkit.dispatchCommand(sender, command.replace("[player] ", ""));
+                Player player = (Player)sender;
+                Bukkit.dispatchCommand(sender, command.replace("[player] ", "").replace("%player%", player.getName()));
                 return;
             }
             if (command.contains("[message]")) {
