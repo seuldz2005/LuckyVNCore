@@ -3,6 +3,7 @@ package com.seul.luckyvncore.Functions;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -40,6 +41,8 @@ public class RegionCubiod {
         this.yMaxCentered = this.yMax + 0.5;
         this.zMinCentered = this.zMin + 0.5;
         this.zMaxCentered = this.zMax + 0.5;
+        FileConfiguration configuration;
+
     }
 
     public Iterator<Block> blockList() {
