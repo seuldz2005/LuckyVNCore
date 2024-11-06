@@ -11,6 +11,7 @@
     import org.bukkit.entity.Player;
     import org.bukkit.util.Vector;
 
+    import java.util.ArrayList;
     import java.util.Iterator;
     import java.util.List;
     import java.util.regex.Matcher;
@@ -103,6 +104,21 @@
             if (command.contains("[message]")) {
                 LKUtils.sendMessage(sender, command.replace("[message] ", ""));
             }
+        }
+
+        public static List<Integer> convertStringtoList(String a) {
+
+            String stripped = a.replaceAll("\\[|\\]", "");
+
+            String[] tokens = stripped.split(",");
+            List<Integer> integerList = new ArrayList<>();
+
+
+            for (String token : tokens) {
+                integerList.add(Integer.parseInt(token.trim()));
+            }
+
+            return integerList;
         }
 
 
