@@ -122,4 +122,26 @@
         }
 
 
+        public static boolean comparewithString(Integer number1, Integer number2, String operator) {
+
+            switch (operator) {
+                case ">=":
+                    return number1 >= number2;
+                case ">":
+                    return number1 > number2;
+                case "<":
+                    return number1 < number2;
+                case "<=":
+                    return number1 <= number2;
+                case "==":
+                    return number1 == number2;
+                case "!=":
+                    return number1 != number2;
+                default:
+                    throw new IllegalArgumentException("Operator '" + operator + "' unvaliable!");
+            }
+
+        }
+
+
     }
