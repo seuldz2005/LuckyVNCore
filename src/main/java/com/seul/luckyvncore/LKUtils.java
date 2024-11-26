@@ -1,5 +1,6 @@
     package com.seul.luckyvncore;
 
+    import me.clip.placeholderapi.PlaceholderAPI;
     import org.bukkit.Bukkit;
     import org.bukkit.ChatColor;
     import org.bukkit.Location;
@@ -9,6 +10,8 @@
     import org.bukkit.command.CommandSender;
     import org.bukkit.command.ConsoleCommandSender;
     import org.bukkit.entity.Player;
+    import org.bukkit.inventory.Inventory;
+    import org.bukkit.inventory.ItemStack;
     import org.bukkit.util.Vector;
 
     import java.util.ArrayList;
@@ -36,7 +39,12 @@
 
         public static void sendMessage(CommandSender player, String message) {
 
-            player.sendMessage(color(message));
+
+            if (player instanceof Player) {
+                if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+                    player.sendMessage(color(PlaceholderAPI.setPlaceholders(((Player) player), message)));
+                }
+            } else player.sendMessage(color(message));
         }
 
         public static void sendMessage(CommandSender player, List<String> message) {
@@ -45,7 +53,12 @@
 
             while(var2.hasNext()) {
                 String s = (String)var2.next();
-                player.sendMessage(color(s));
+
+                if (player instanceof Player) {
+                    if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+                        player.sendMessage(color(PlaceholderAPI.setPlaceholders(((Player) player), s)));
+                    }
+                } else player.sendMessage(color(s));
             }
 
         }
@@ -143,5 +156,27 @@
 
         }
 
+        public static boolean removeItem(Player player, ItemStack item) {
+            Inventory inventory = player.getInventory();
+            int amountToRemove = item.getAmount();
+            for (int i = 0; i < inventory.getSize(); i++) {
+                ItemStack currentItem = inventory.getItem(i);
+
+                if (currentItem != null && currentItem.isSimilar(item)) {
+                    int currentAmount = currentItem.getAmount();
+
+                    if (currentAmount >= amountToRemove) {
+                        currentItem.setAmount(currentAmount - amountToRemove);
+                        inventory.setItem(i, currentItem);
+                        return true;
+                    } else {
+                        amountToRemove -= currentAmount;
+                        inventory.clear(i);
+                    }
+                }
+            }
+
+            return false;
+        }
 
     }
