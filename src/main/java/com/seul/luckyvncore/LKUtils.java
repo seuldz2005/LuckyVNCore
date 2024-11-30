@@ -120,6 +120,7 @@ public class LKUtils {
         String[] tokens = stripped.split(",");
         List<Integer> integerList = new ArrayList<>();
 
+        if (a.equals("[]")) return integerList;
 
         for (String token : tokens) {
             integerList.add(Integer.parseInt(token.trim()));

@@ -23,13 +23,15 @@ public class LKItems {
 
     private ItemStack item;
     private List<String> lores;
+    private String name;
+    public LKItems(String material, String name, List<String> lores) {
 
-    public LKItems(String material, List<String> lores) {
+        item = material.toUpperCase().equals("headbase") ? getHeadBase(material) : XMaterial.valueOf(material).parseItem();
 
-        item = material.equals("headbase") ? getHeadBase(material) : XMaterial.valueOf(material).parseItem();
-
-        lores = (lores == null) ? new ArrayList<>() : lores;
-        setLores(lores);
+        this.name = name == null ? null : name;
+        this.lores = (lores == null) ? new ArrayList<>() : lores;
+        setLores(this.lores);
+        setName(this.name);
     }
 
     public ItemStack getItem() {
@@ -40,9 +42,18 @@ public class LKItems {
         return lores;
     }
 
+    public void setName(String name) {
+        if (name == null) return;
+        this.name = name;
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(LKUtils.color(name));
+        item.setItemMeta(meta);
+    }
+
     public void setLores(List<String> lores) {
         ItemMeta meta = item.getItemMeta();
-        meta.setLore(lores.stream().map(s -> LKUtils.color(s)).collect(Collectors.toList()));
+        this.lores = lores.stream().map(s -> LKUtils.color(s)).collect(Collectors.toList());
+        meta.setLore(this.lores);
         item.setItemMeta(meta);
     }
 
