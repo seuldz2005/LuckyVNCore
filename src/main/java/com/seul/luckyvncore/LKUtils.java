@@ -99,6 +99,15 @@ public class LKUtils {
 
 
     public static void dispatchCommand(CommandSender sender, String command) {
+
+        if (sender instanceof Player) {
+            Player player = (Player)sender;
+            if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+                command = PlaceholderAPI.setPlaceholders(((Player) player), command);
+            }
+        }
+
+
         if (command.contains("[console]")) {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("[console] ", ""));
             return;
@@ -130,7 +139,7 @@ public class LKUtils {
     }
 
 
-    public static boolean comparewithString(Integer number1, Integer number2, String operator) {
+    public static boolean comparewithString(Long number1, Long number2, String operator) {
 
         switch (operator) {
             case ">=":
