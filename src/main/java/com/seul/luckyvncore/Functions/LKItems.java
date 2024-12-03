@@ -26,7 +26,8 @@ public class LKItems {
     private String name;
     public LKItems(String material, String name, List<String> lores) {
 
-        item = material.toUpperCase().equals("headbase") ? getHeadBase(material) : XMaterial.valueOf(material).parseItem();
+
+        item = material.contains("headbase") ? getHeadBase(material.replace("headbase-", "")) : XMaterial.valueOf(material).parseItem();
 
         this.name = name == null ? null : name;
         this.lores = (lores == null) ? new ArrayList<>() : lores;
