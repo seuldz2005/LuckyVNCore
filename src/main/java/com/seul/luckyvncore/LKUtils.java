@@ -1,6 +1,8 @@
 package com.seul.luckyvncore;
 
 import me.clip.placeholderapi.PlaceholderAPI;
+import net.Indyuce.mmoitems.MMOItems;
+import net.Indyuce.mmoitems.api.Type;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -11,12 +13,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LKUtils {
 
     private static final Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
+    private static final Map<Type, Map<String, ItemStack>> mmoItemCache = new ConcurrentHashMap<>();
 
     // ALLOW HEX COLOR
     public static String color(String message) {
@@ -182,5 +186,28 @@ public class LKUtils {
 
         return false;
     }
+
+    public static ItemStack computeMMOItem(Type type, String id) {
+        return mmoItemCache.computeIfAbsent(type, t -> new ConcurrentHashMap<>())
+                .computeIfAbsent(id, key -> MMOItems.plugin.getItem(type, id));
+    }
+
+    public static ItemStack getItems(String[] material) {
+        switch (material[0].toUpperCase()) {
+            case "MMOITEMS":
+                return computeMMOItem(Type.get(material[1]), material[2]);
+            case "MATERIAL":
+                return new ItemStack(Material.valueOf(material[1]));
+            default:
+                return new ItemStack(Material.STONE);
+        }
+    }
+
+    public static boolean isMMOItem(ItemStack itemStack) {
+        if(itemStack == null || itemStack.getType() == Material.AIR)
+            return false;
+        return Type.get(itemStack) != null;
+    }
+
 
 }
