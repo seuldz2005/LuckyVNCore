@@ -209,5 +209,77 @@ public class LKUtils {
         return Type.get(itemStack) != null;
     }
 
+    public static String toSmallCaps(String text) {
+        StringBuilder smallCapsText = new StringBuilder();
+        for (char c : text.toCharArray()) {
+            if (c >= 'A' && c <= 'Z') {
+                switch (c) {
+                    case 'A': smallCapsText.append('\u1D00'); break; // ᴀ
+                    case 'B': smallCapsText.append('\u0299'); break; // ʙ
+                    case 'C': smallCapsText.append('\u1D04'); break; // ᴄ
+                    case 'D': smallCapsText.append('\u1D05'); break; // ᴅ
+                    case 'E': smallCapsText.append('\u1D07'); break; // ᴇ
+                    case 'F': smallCapsText.append('\uA730'); break; // ꜰ (Latin letter small capital F)
+                    case 'G': smallCapsText.append('\u1D08'); break; // ɢ
+                    case 'H': smallCapsText.append('\u029C'); break; // ʜ
+                    case 'I': smallCapsText.append('\u1D09'); break; // ɪ
+                    case 'J': smallCapsText.append('\u1D0A'); break; // ᴊ
+                    case 'K': smallCapsText.append('\u1D0B'); break; // ᴋ
+                    case 'L': smallCapsText.append('\u029F'); break; // ʟ
+                    case 'M': smallCapsText.append('\u1D0D'); break; // ᴍ
+                    case 'N': smallCapsText.append('\u0274'); break; // ɴ
+                    case 'O': smallCapsText.append('\u1D0F'); break; // ᴏ
+                    case 'P': smallCapsText.append('\u1D18'); break; // ᴘ
+                    case 'Q': smallCapsText.append('Q'); break; // No direct small capital for Q in common blocks, can use regular Q or look for alternatives if specific need
+                    case 'R': smallCapsText.append('\u0280'); break; // ʀ
+                    case 'S': smallCapsText.append('s'); break; // No direct small capital for S in common blocks
+                    case 'T': smallCapsText.append('\u1D1B'); break; // ᴛ
+                    case 'U': smallCapsText.append('\u1D1C'); break; // ᴜ
+                    case 'V': smallCapsText.append('\u1D20'); break; // ᴠ
+                    case 'W': smallCapsText.append('\u1D21'); break; // ᴡ
+                    case 'X': smallCapsText.append('\u0078'); break; // ˣ
+                    case 'Y': smallCapsText.append('\u028F'); break; // ʏ
+                    case 'Z': smallCapsText.append('\u1D22'); break; // ᴢ
+                    default: smallCapsText.append(c); break; // Append character as is if no mapping
+                }
+            } else if (c >= 'a' && c <= 'z') {
+                // Convert lowercase letters to their small capital Unicode equivalents (often same as uppercase small caps)
+                switch (c) {
+                    case 'a': smallCapsText.append('\u1D00'); break; // ᴀ
+                    case 'b': smallCapsText.append('\u0299'); break; // ʙ
+                    case 'c': smallCapsText.append('\u1D04'); break; // ᴄ
+                    case 'd': smallCapsText.append('\u1D05'); break; // ᴅ
+                    case 'e': smallCapsText.append('\u1D07'); break; // ᴇ
+                    case 'f': smallCapsText.append('\uA730'); break; // ꜰ
+                    case 'g': smallCapsText.append('\u1D08'); break; // ɢ
+                    case 'h': smallCapsText.append('\u029C'); break; // ʜ
+                    case 'i': smallCapsText.append('\u1D09'); break; // ɪ
+                    case 'j': smallCapsText.append('\u1D0A'); break; // ᴊ
+                    case 'k': smallCapsText.append('\u1D0B'); break; // ᴋ
+                    case 'l': smallCapsText.append('\u029F'); break; // ʟ
+                    case 'm': smallCapsText.append('\u1D0D'); break; // ᴍ
+                    case 'n': smallCapsText.append('\u0274'); break; // ɴ
+                    case 'o': smallCapsText.append('\u1D0F'); break; // ᴏ
+                    case 'p': smallCapsText.append('\u1D18'); break; // ᴘ
+                    case 'q': smallCapsText.append('q'); break; // No direct small capital for Q in common blocks
+                    case 'r': smallCapsText.append('\u0280'); break; // ʀ
+                    case 's': smallCapsText.append('s'); break; // No direct small capital for S in common blocks
+                    case 't': smallCapsText.append('\u1D1B'); break; // ᴛ
+                    case 'u': smallCapsText.append('\u1D1C'); break; // ᴜ
+                    case 'v': smallCapsText.append('\u1D20'); break; // ᴠ
+                    case 'w': smallCapsText.append('\u1D21'); break; // ᴡ
+                    case 'x': smallCapsText.append('\u0078'); break; // ˣ
+                    case 'y': smallCapsText.append('\u028F'); break; // ʏ
+                    case 'z': smallCapsText.append('\u1D22'); break; // ᴢ
+                    default: smallCapsText.append(c); break; // Append character as is
+                }
+            } else {
+                smallCapsText.append(c); // Append non-alphabetic characters as is (e.g., '.', '/')
+            }
+        }
+        return smallCapsText.toString();
+    }
 
 }
+
+
