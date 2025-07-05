@@ -40,9 +40,7 @@ public class Placeholder extends PlaceholderExpansion {
         switch (args[0].toLowerCase()) {
 
             case "monoupper": {
-
                 String parse = params.replace("monoupper_", "").replaceAll("[{}]", "%");
-
                 return LKUtils.toSmallCaps(PlaceholderAPI.setPlaceholders(((Player) player), parse));
             }
 

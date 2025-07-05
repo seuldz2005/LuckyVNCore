@@ -104,6 +104,15 @@ public class LKUtils {
 
     public static void dispatchCommand(CommandSender sender, String command) {
 
+        Pattern pattern = Pattern.compile("\\{random=(\\d+)-(\\d+)}");
+        Matcher matcher = pattern.matcher(command);
+
+        if (matcher.find()) {
+            int random = new Random().nextInt(Integer.parseInt(matcher.group(2))) + Integer.parseInt(matcher.group(1));
+            command = command.replaceAll("\\{random=(\\d+)-(\\d+)}", random + "");
+
+        }
+
         if (sender instanceof Player) {
             Player player = (Player)sender;
             if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
@@ -220,7 +229,7 @@ public class LKUtils {
                     case 'D': smallCapsText.append('\u1D05'); break; // ᴅ
                     case 'E': smallCapsText.append('\u1D07'); break; // ᴇ
                     case 'F': smallCapsText.append('\uA730'); break; // ꜰ (Latin letter small capital F)
-                    case 'G': smallCapsText.append('\u1D08'); break; // ɢ
+                    case 'G': smallCapsText.append('\u0262'); break; // ɢ
                     case 'H': smallCapsText.append('\u029C'); break; // ʜ
                     case 'I': smallCapsText.append('\u1D09'); break; // ɪ
                     case 'J': smallCapsText.append('\u1D0A'); break; // ᴊ
@@ -251,7 +260,7 @@ public class LKUtils {
                     case 'd': smallCapsText.append('\u1D05'); break; // ᴅ
                     case 'e': smallCapsText.append('\u1D07'); break; // ᴇ
                     case 'f': smallCapsText.append('\uA730'); break; // ꜰ
-                    case 'g': smallCapsText.append('\u1D08'); break; // ɢ
+                    case 'g': smallCapsText.append('\u0262'); break; // ɢ
                     case 'h': smallCapsText.append('\u029C'); break; // ʜ
                     case 'i': smallCapsText.append('\u1D09'); break; // ɪ
                     case 'j': smallCapsText.append('\u1D0A'); break; // ᴊ
