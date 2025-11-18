@@ -36,7 +36,7 @@ public class LKItems {
     }
 
     public ItemStack getItem() {
-        return item;
+        return item.clone();
     }
 
     public List<String> getLores() {
