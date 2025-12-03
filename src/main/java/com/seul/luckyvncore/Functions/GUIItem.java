@@ -7,9 +7,15 @@ public class GUIItem {
     private LKItems items;
     private int slot;
 
+    private String name;
+
     public GUIItem(ConfigurationSection section) {
-        this.items = new LKItems(section.getString("material"), section.getString("name"), section.getStringList("lore"));
+        this.name = section.getString("name", "");
+        this.items = new LKItems(section.getString("material"), name, section.getStringList("lore"));
         this.slot = section.getInt("slot");
+    }
+    public String getName() {
+        return name;
     }
 
     public LKItems getItems() {
