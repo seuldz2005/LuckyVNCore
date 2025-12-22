@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import java.util.*;
@@ -104,6 +105,7 @@ public class LKUtils {
 
     public static void dispatchCommand(CommandSender sender, String command) {
 
+
         Pattern pattern = Pattern.compile("\\{random=(\\d+)-(\\d+)}");
         Matcher matcher = pattern.matcher(command);
 
@@ -120,19 +122,27 @@ public class LKUtils {
             }
         }
 
+        String finalCommand = command;
+        (new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (finalCommand.contains("[console]")) {
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), finalCommand.replace("[console] ", ""));
+                    return;
+                }
+                if (finalCommand.contains("[player]")) {
+                    Player player = (Player)sender;
+                    Bukkit.dispatchCommand(sender, finalCommand.replace("[player] ", "").replace("%player%", player.getName()));
+                    return;
+                }
+                if (finalCommand.contains("[message]")) {
+                    LKUtils.sendMessage(sender, finalCommand.replace("[message] ", ""));
+                }
+            }
+        }).runTask(LuckyVNCore.plugin);
 
-        if (command.contains("[console]")) {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("[console] ", ""));
-            return;
-        }
-        if (command.contains("[player]")) {
-            Player player = (Player)sender;
-            Bukkit.dispatchCommand(sender, command.replace("[player] ", "").replace("%player%", player.getName()));
-            return;
-        }
-        if (command.contains("[message]")) {
-            LKUtils.sendMessage(sender, command.replace("[message] ", ""));
-        }
+
+
     }
 
     public static List<Integer> convertStringtoList(String a) {
