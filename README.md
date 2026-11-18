@@ -4,8 +4,8 @@ Core API cho các plugin trong LuckyVN Network.
 
 ## Yêu cầu
 
-- Server Minecraft `1.21.11`.
-- Java `21`.
+- Server Minecraft `1.20.4`.
+- Java `17`.
 - PlaceholderAPI là tùy chọn; cần khi dùng placeholder.
 
 ## Cài đặt
